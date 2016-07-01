@@ -24,8 +24,8 @@ public class MainActivity extends ActionBarActivity {
     int quantity = 0;
 
     public void submitOrder(View view) {
-        int price = quantity * 5;
-        String priceMessage = "Amount Due $" + price;
+        int price = calculatePrice();
+        String priceMessage = createOrderSummary(price);
         displayMessage(priceMessage);
     }
     public void lowerValue(View view) {
@@ -47,18 +47,29 @@ public class MainActivity extends ActionBarActivity {
     }
 
     /**
-     * This method displays the given price on the screen.
-     */
-    private void displayPrice(int number) {
-        TextView priceTextView = (TextView) findViewById(R.id.order_cost);
-        priceTextView.setText(NumberFormat.getCurrencyInstance().format(number));
-    }
-
-    /**
      * This method displays the given text on the screen.
      */
     private void displayMessage(String message) {
-        TextView priceTextView = (TextView) findViewById(R.id.price_text_view);
-        priceTextView.setText(message);
+        TextView orderSummaryTextView = (TextView) findViewById(R.id.order_summary_text_view);
+        orderSummaryTextView.setText(message);
     }
+
+    /**
+     * Calculate the price and return total
+     */
+    private int  calculatePrice() {
+        int totalPrice = (quantity * 5);
+        return totalPrice;
+    }
+
+    /**
+     * Take in price, quantity, and name
+     * Return Order Summary message
+     */
+    private String createOrderSummary(int price) {
+        return "Name: " + "Kaptain Kunal" + "\nQuantiy: " + quantity + "\nTotal: $"
+                + price + "\nThank you!";
+    }
+
+
 }
